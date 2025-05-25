@@ -5,5 +5,10 @@ import path from "path";
 function getMdxFiles(dir: string) {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 }
+
 //Read data from files
+function readMdxFile(filepath: fs.PathOrFileDescriptor) {
+  const rawContent = fs.readFileSync(filepath, "utf-8");
+  return rawContent;
+}
 //present data and metadata
