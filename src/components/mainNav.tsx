@@ -8,7 +8,7 @@ const MainNav = () => (
       <Icons.logo className="h-6 w-6" />
       <h1 className="font-bold text-2xl">Rori Blog</h1>
     </Link>
-    <div className="flex flex-row gap-10">
+    <div className="flex flex-row gap-10 items-center">
       <ul className="flex flex-row gap-10">
         {links.map((link) => (
           <Link href={link.link} key={link.link}>
