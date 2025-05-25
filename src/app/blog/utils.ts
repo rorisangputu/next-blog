@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+
 //get all mdx files from dir
 function getMdxFiles(dir: string) {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
@@ -26,4 +27,8 @@ function getMdxData(dir: string) {
       content,
     };
   });
+}
+
+export function getBlogPosts() {
+  return getMdxData(path.join(process.cwd(), "src", "app", "blog", "contents"));
 }
