@@ -17,6 +17,13 @@ function getMdxData(dir: string) {
   const mdxFiles = getMdxFiles(dir);
 
   return mdxFiles.map((file) => {
-    let { data, content } = readMdxFile(path.join(dir, file));
+    const { data: metadata, content } = readMdxFile(path.join(dir, file));
+    const slug = path.basename(file, path.extname(file));
+
+    return {
+      metadata,
+      slug,
+      content,
+    };
   });
 }
