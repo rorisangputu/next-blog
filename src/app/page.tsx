@@ -1,7 +1,9 @@
+import LatestPosts from "@/components/home/latest-post";
+
 export default function Home() {
   return (
     <main>
-      <h1>Hello</h1>
+      <LatestPosts />
     </main>
   );
 }
