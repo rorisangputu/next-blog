@@ -1,4 +1,4 @@
-import { getBlogPosts } from "@/app/blog/utils";
+import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import Link from "next/link";
 
 export default function LatestPosts() {
@@ -16,7 +16,7 @@ export default function LatestPosts() {
           </Link>
           <p className="leading-8 my-5">{post.metadata.summary}</p>
           <p className="text-sm text-muted-foreground">
-            {post.metadata.publishedAt}
+            {formatDate(post.metadata.publishedAt)}
           </p>
         </article>
       ))}
