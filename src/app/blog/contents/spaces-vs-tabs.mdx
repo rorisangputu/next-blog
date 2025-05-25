@@ -1,153 +1,32 @@
 ---
-title: "React 19 RC"
-publishedAt: "2024-06-26"
-summary: "In this post, we’ll give an overview of the new features in React 19, and how you can adopt them."
+title: "Spaces vs. Tabs: The Indentation Debate Continues"
+publishedAt: "2024-04-08"
+summary: "Explore the enduring debate between using spaces and tabs for code indentation, and why this choice matters more than you might think."
 category: "react"
 ---
 
-In our React 19 RC Upgrade Guide, we shared step-by-step instructions for upgrading your app to React 19. In this post, we’ll give an overview of the new features in React 19, and how you can adopt them.
+The debate between using spaces and tabs for indentation in coding may seem trivial to the uninitiated, but it is a topic that continues to inspire passionate discussions among developers. This seemingly minor choice can affect code readability, maintenance, and even team dynamics.
 
-## What&#39;s new in React 19
+Let's delve into the arguments for both sides and consider why this debate remains relevant in the software development world.
 
-### Actions
+## The Case for Spaces
 
-A common use case in React apps is to perform a data mutation and then update state in response. For example, when a user submits a form to change their name, you will make an API request, and then handle the response. In the past, you would need to handle pending states, errors, optimistic updates, and sequential requests manually.
+Advocates for using spaces argue that it ensures consistent code appearance across different editors, tools, and platforms. Because a space is a universally recognized character with a consistent width, code indented with spaces will look the same no matter where it's viewed. This consistency is crucial for maintaining readability and avoiding formatting issues when code is shared between team members or published online.
 
-For example, you could handle the pending and error state in `useState`:
+Additionally, some programming languages and style guides explicitly recommend spaces for indentation, suggesting a certain number of spaces (often two or four) per indentation level. Adhering to these recommendations can be essential for projects that aim for best practices in code quality and readability.
 
-```js
-// Before Actions
-function UpdateName({}) {
-  const [name, setName] = useState("");
-  const [error, setError] = useState(null);
-  const [isPending, setIsPending] = useState(false);
+## The Case for Tabs
 
-  const handleSubmit = async () => {
-    setIsPending(true);
-    const error = await updateName(name);
-    setIsPending(false);
-    if (error) {
-      setError(error);
-      return;
-    }
-    redirect("/path");
-  };
+On the other side of the debate, proponents of tabs highlight the flexibility that tabs offer. Because the width of a tab can be adjusted in most text editors, individual developers can choose how much indentation they prefer to see, making the code more accessible and comfortable to read on a personal level. This adaptability can be particularly beneficial in teams with diverse preferences regarding code layout.
 
-  return (
-    <div>
-      <input value={name} onChange={(event) => setName(event.target.value)} />
-      <button onClick={handleSubmit} disabled={isPending}>
-        Update
-      </button>
-      {error && <p>{error}</p>}
-    </div>
-  );
-}
-```
+Tabs also have the advantage of semantic meaning. A tab is explicitly meant to represent indentation, whereas a space is used for many purposes within code. This distinction can make automated parsing and manipulation of code simpler, as tools can more easily recognize and adjust indentation levels without confusing them with spaces used for alignment.
 
-In React 19, we’re adding support for using async functions in transitions to handle pending states, errors, forms, and optimistic updates automatically.
+## Hybrid Approaches and Team Dynamics
 
-For example, you can use `useTransition` to handle the pending state for you:
+The debate often extends into discussions about hybrid approaches, where teams might use tabs for indentation and spaces for alignment within lines, attempting to combine the best of both worlds. However, such strategies require clear team agreements and disciplined adherence to coding standards to prevent formatting chaos.
 
-```js
-// Using pending state from Actions
-function UpdateName({}) {
-  const [name, setName] = useState("");
-  const [error, setError] = useState(null);
-  const [isPending, startTransition] = useTransition();
+Ultimately, the choice between spaces and tabs often comes down to team consensus and project guidelines. In environments where collaboration and code sharing are common, agreeing on a standard that everyone follows is more important than the individual preferences of spaces versus tabs. Modern development tools and linters can help enforce these standards, making the choice less about technical limitations and more about team dynamics and coding philosophy.
 
-  const handleSubmit = () => {
-    startTransition(async () => {
-      const error = await updateName(name);
-      if (error) {
-        setError(error);
-        return;
-      }
-      redirect("/path");
-    });
-  };
+## Conclusion
 
-  return (
-    <div>
-      <input value={name} onChange={(event) => setName(event.target.value)} />
-      <button onClick={handleSubmit} disabled={isPending}>
-        Update
-      </button>
-      {error && <p>{error}</p>}
-    </div>
-  );
-}
-```
-
-The async transition will immediately set the `isPending` state to true, make the async request(s), and switch `isPending` to false after any transitions. This allows you to keep the current UI responsive and interactive while the data is changing.
-
-> ### Note
->
-> By convention, functions that use async transitions are called “Actions”. Actions
-> automatically manage submitting data for you:
->
-> - Pending state: Actions provide a pending state that starts at the beginning of a request and automatically resets when the final state update is committed.
-> - Optimistic updates: Actions support the new `useOptimistic` hook so you can show users instant feedback while the requests are submitting.
-> - Error handling: Actions provide error handling so you can display Error Boundaries when a request fails, and revert optimistic updates to their original value automatically.
-> - Forms: `<form>` elements now support passing functions to the `action` and `formAction` props. Passing functions to the `action` props use Actions by default and reset the form automatically after submission.
-
-Building on top of Actions, React 19 introduces `useOptimistic` to manage optimistic updates, and a new hook `React.useActionState` to handle common cases for Actions. In react-dom we’re adding `<form>` `Actions` to manage forms automatically and `useFormStatus` to support the common cases for Actions in forms.
-
-In React 19, the above example can be simplified to:
-
-```js
-// Using <form> Actions and useActionState
-function ChangeName({ name, setName }) {
-  const [error, submitAction, isPending] = useActionState(
-    async (previousState, formData) => {
-      const error = await updateName(formData.get("name"));
-      if (error) {
-        return error;
-      }
-      redirect("/path");
-      return null;
-    },
-    null
-  );
-
-  return (
-    <form action={submitAction}>
-      <input type="text" name="name" />
-      <button type="submit" disabled={isPending}>
-        Update
-      </button>
-      {error && <p>{error}</p>}
-    </form>
-  );
-}
-```
-
-In the next section, we’ll break down each of the new Action features in React 19.
-
-## New hook: `useActionState`
-
-To make the common cases easier for Actions, we’ve added a new hook called `useActionState`:
-
-```js
-const [error, submitAction, isPending] = useActionState(
-  async (previousState, newName) => {
-    const error = await updateName(newName);
-    if (error) {
-      // You can return any result of the action.
-      // Here, we return only the error.
-      return error;
-    }
-
-    // handle success
-    return null;
-  },
-  null
-);
-```
-
-`useActionState` accepts a function (the “Action”), and returns a wrapped Action to call. This works because Actions compose. When the wrapped Action is called, `useActionState` will return the last result of the Action as `data`, and the pending state of the Action as `pending`.
-
-> ### Note
->
-> `React.useActionState` was previously called `ReactDOM.useFormState` in the Canary
-> releases, but we&#39;ve renamed it and deprecated `useFormState`.{" "}
+While the spaces vs. tabs debate might not have a one-size-fits-all answer, it underscores the importance of consistency, readability, and team collaboration in software development. Whether a team chooses spaces, tabs, or a hybrid approach, the key is to make a conscious choice that serves the project's needs and to adhere to it throughout the codebase. As with many aspects of coding, communication and agreement among team members are paramount to navigating this classic programming debate.
