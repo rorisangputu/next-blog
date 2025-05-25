@@ -18,7 +18,7 @@ const MainNav = () => (
       </ul>
       <div>
         <Link href={"/rss"}>
-          <Icons.rss className="h-6 w-6" />
+          <Icons.rss className="h-6 w-6 hover:text-amber-500" />
         </Link>
       </div>
     </div>
