@@ -6,7 +6,7 @@ export default function LatestPosts() {
   //console.log(latestPosts);
   return (
     <>
-      <h1>Recently Published</h1>
+      <h1 className="text-lg">Recently Published</h1>
       {latestPosts.map((post) => (
         <article key={post.slug} className="text-wrap max-w-md my-10">
           <Link href={`/`}>

@@ -29,8 +29,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="w-full">
-          <div className="w-[70%] mx-auto">
+          <div className="w-[90%] lg:w-[70%] xl:w-[60%] mx-auto">
             <MainNav />
+            <hr className="w-[30%] mx-auto mb-10 text-gray-300" />
             {children}
           </div>
         </div>
