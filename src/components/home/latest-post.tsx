@@ -15,6 +15,9 @@ export default function LatestPosts() {
             </h3>
           </Link>
           <p className="leading-8 my-5">{post.metadata.summary}</p>
+          <p className="text-sm text-muted-foreground">
+            {post.metadata.publishedAt}
+          </p>
         </article>
       ))}
     </>
