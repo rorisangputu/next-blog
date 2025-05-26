@@ -55,6 +55,35 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+          <div className="space-y-4">
+            <h3 className="text-md font-semibold">Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="mailto:rorisangputu@gmail.com"
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <Link
+                  href={"/terms-of-use"}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  Terms of Use
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={"/privacy-policy"}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
