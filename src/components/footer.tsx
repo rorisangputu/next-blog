@@ -44,9 +44,14 @@ export default function Footer() {
             <h2 className="text-md font-semibold">Blog</h2>
             <ul className="space-y-2 text-sm">
               {POSTS.map((POST) => (
-                <Link key={POST.title} href={`/blog/${POST.title}`}>
-                  <li>{POST.title}</li>
-                </Link>
+                <li key={POST.title}>
+                  <Link
+                    href={`/blog/${POST.href}`}
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  >
+                    {POST.title}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
