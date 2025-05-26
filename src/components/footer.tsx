@@ -84,6 +84,23 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+          <div className="space-y-4">
+            <h3 className="text-md font-semibold">Newsletter</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            </p>
+            <form>
+              <div className="flex space-x-2">
+                <input
+                  type="email"
+                  className="border-gray-400 border p-1 rounded-md bg-gray-50"
+                />
+                <button className="bg-blue-600 text-white py-1 px-3 text-sm font-semibold rounded-md">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </footer>
