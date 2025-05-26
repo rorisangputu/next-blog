@@ -8,7 +8,7 @@ const Container = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div>
+    <div className="mx-auto w-full max-w-screen-xl px-2.5">
       {children}
     </div>
   );
