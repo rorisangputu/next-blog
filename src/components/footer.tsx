@@ -17,12 +17,12 @@ export default function Footer() {
             </p>
             <div className="flex space-x-3">
               <a
-                href="https://x.com/"
+                href="https://www.linkedin.com/in/rorisang-putu-460854212/"
                 target="blank"
                 rel="noopener noreferrer"
-                aria-label="twitter"
+                aria-label="linkedin"
               >
-                <Icons.twitter
+                <Icons.linkedin
                   className="h-6 w-6 text-gray-500 hover:text-gray-700 
                     dark:text-gray-400 dark:hover:text-gray-200"
                 />
@@ -90,7 +90,7 @@ export default function Footer() {
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p>
             <form>
-              <div className="flex flex-col gap-2 lg:gap-0 lg:flex-row space-x-2">
+              <div className="flex space-x-2">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -105,6 +105,12 @@ export default function Footer() {
               </div>
             </form>
           </div>
+        </div>
+        <div
+          className="mt-8 border-gray-200 border-t pt-4 text-center text-xs 
+        text-gray-500 dark:text-gray-400"
+        >
+          <p>&copy; 2025 Rorisang Putu. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
