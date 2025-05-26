@@ -1,4 +1,6 @@
+import { POSTS } from "@/lib/constants";
 import { Icons } from "./icons";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -37,6 +39,16 @@ export default function Footer() {
                 />
               </a>
             </div>
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-md font-semibold">Blog</h2>
+            <ul className="space-y-2 text-sm">
+              {POSTS.map((POST) => (
+                <Link key={POST.title} href={`/blog/${POST.title}`}>
+                  <li>{POST.title}</li>
+                </Link>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
