@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function TopCategories() {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-2">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-3">
       {categories.map((category) => (
         <button
           className="bg-gray-200 text-gray-800 shadow-gray-300 shadow-sm 
