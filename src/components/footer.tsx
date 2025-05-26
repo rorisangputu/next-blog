@@ -90,12 +90,16 @@ export default function Footer() {
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p>
             <form>
-              <div className="flex space-x-2">
+              <div className="flex flex-col gap-2 lg:gap-0 lg:flex-row space-x-2">
                 <input
                   type="email"
-                  className="border-gray-400 border p-1 rounded-md bg-gray-50"
+                  placeholder="Enter your email"
+                  className="border-gray-400 border p-1 flex-1 rounded-md bg-gray-50"
                 />
-                <button className="bg-blue-600 text-white py-1 px-3 text-sm font-semibold rounded-md">
+                <button
+                  type="submit"
+                  className="bg-black text-white py-1 px-2 text-sm font-semibold rounded-md"
+                >
                   Submit
                 </button>
               </div>
