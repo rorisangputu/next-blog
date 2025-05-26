@@ -13,6 +13,30 @@ export default function Footer() {
             <p className="text-gray-500 dark:text-gray-400 text-sm">
               Stay up to date with the latest updates from my blog
             </p>
+            <div className="flex space-x-3">
+              <a
+                href="https://x.com/"
+                target="blank"
+                rel="noopener noreferrer"
+                aria-label="twitter"
+              >
+                <Icons.twitter
+                  className="h-6 w-6 text-gray-500 hover:text-gray-700 
+                    dark:text-gray-400 dark:hover:text-gray-200"
+                />
+              </a>
+              <a
+                href="https://github.com/rorisangputu"
+                target="blank"
+                rel="noopener noreferrer"
+                aria-label="github"
+              >
+                <Icons.gitHub
+                  className="h-6 w-6 text-gray-500 hover:text-gray-700 
+                    dark:text-gray-400 dark:hover:text-gray-200"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
