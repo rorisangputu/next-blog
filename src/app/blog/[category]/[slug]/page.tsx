@@ -1,15 +1,25 @@
 import { notFound } from "next/navigation";
-import { formatDate, getBlogPosts } from "../../utils";
+import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import Header from "@/components/Header";
 import Container from "@/components/Container";
 import BreadCrumb from "@/components/BreadCrumb";
 import { CustomMDX } from "@/components/mdx";
+import { NextPage } from "next";
 
-export default function Page({
-  params,
-}: {
+export async function generateStaticParams() {
+  const posts = getBlogPosts();
+
+  return posts.map((post) => ({
+    category: post.metadata.category, // Add category
+    slug: post.slug,
+  }));
+}
+
+type Params = {
   params: { category: string; slug: string };
-}) {
+};
+
+const Page: NextPage<Params> = async ({ params }) => {
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
@@ -38,4 +48,6 @@ export default function Page({
       </Container>
     </>
   );
-}
+};
+
+export default Page;
