@@ -90,7 +90,7 @@ export default function Footer() {
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p>
             <form>
-              <div className="flex space-x-2">
+              <div className="flex flex-col space-x-2 gap-2">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -98,7 +98,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white py-1 px-2 text-sm font-semibold rounded-md"
+                  className="bg-black text-white py-1 px-2 text-sm font-semibold rounded-md w-[100px]"
                 >
                   Submit
                 </button>
