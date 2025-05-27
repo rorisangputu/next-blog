@@ -65,10 +65,12 @@ function Code({ children, ...props }: any) {
 }
 
 function BlockQuote(props: any) {
-  <blockquote
-    className="bg-blue-200 dark:bg-blue-900 dark:bg-opacity-30 bg-opacity-30 p-4 rounded-md blockquote"
-    {...props}
-  />;
+  return (
+    <blockquote
+      className="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30 bg-opacity-30 p-4 rounded-md blockquote"
+      {...props}
+    />
+  );
 }
 
 function Table({ data }: any) {
