@@ -9,19 +9,24 @@ import { NextPage } from "next";
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
-  return posts.map((post) => ({
-    category: post.metadata.category,
+  // Ensure unique categories to avoid duplicate paths
+  const uniqueCategories = Array.from(
+    new Set(posts.map((post) => post.metadata.category))
+  );
+
+  return uniqueCategories.map((category) => ({
+    category,
   }));
 }
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
 
 const Page: NextPage<CategoryPageProps> = async ({ params }) => {
-  const { category } = params;
+  const { category } = await params;
 
   // Filter posts by category
   const posts = getBlogPosts().filter(
