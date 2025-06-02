@@ -4,27 +4,55 @@ import Header from "@/components/Header";
 import Container from "@/components/Container";
 import BreadCrumb from "@/components/BreadCrumb";
 import { CustomMDX } from "@/components/mdx";
-import { NextPage } from "next";
+import { Metadata } from "next";
 
+// ✅ Static params for dynamic routes
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
   return posts.map((post) => ({
-    category: post.metadata.category, // Add category
+    category: post.metadata.category,
     slug: post.slug,
   }));
 }
 
-type Params = {
+// ✅ Metadata generation
+export async function generateMetadata({
+  params,
+}: {
   params: { category: string; slug: string };
-};
+}): Promise<Metadata> {
+  const { category, slug } = params;
 
-const Page: NextPage<Params> = async ({ params }) => {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const post = getBlogPosts().find(
+    (p) =>
+      p.slug === slug &&
+      p.metadata.category.toLowerCase() === category.toLowerCase()
+  );
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) return { title: "Post Not Found" };
+
+  return {
+    title: post.metadata.title,
+    description: post.metadata.summary || "Blog post",
+  };
+}
+
+// ✅ Page component
+export default async function Page({
+  params,
+}: {
+  params: { category: string; slug: string };
+}) {
+  const { category, slug } = params;
+
+  const post = getBlogPosts().find(
+    (p) =>
+      p.slug === slug &&
+      p.metadata.category.toLowerCase() === category.toLowerCase()
+  );
+
+  if (!post) notFound();
 
   return (
     <>
@@ -48,6 +76,4 @@ const Page: NextPage<Params> = async ({ params }) => {
       </Container>
     </>
   );
-};
-
-export default Page;
+}
