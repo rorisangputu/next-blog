@@ -2,6 +2,19 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
+interface BlogPostMetadata {
+  title: string;
+  category: string;
+  publishedAt: string;
+  summary: string;
+}
+
+interface BlogPost {
+  metadata: BlogPostMetadata;
+  slug: string;
+  content: string;
+}
+
 //get all mdx files from dir
 function getMdxFiles(dir: string) {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
@@ -22,15 +35,22 @@ function getMdxData(dir: string) {
     const slug = path.basename(file, path.extname(file));
 
     return {
-      metadata,
+      metadata: metadata as BlogPostMetadata,
       slug,
       content,
     };
   });
 }
 
-export function getBlogPosts() {
-  return getMdxData(path.join(process.cwd(), "src", "app", "blog", "contents"));
+export function getBlogPosts(): BlogPost[] {
+  try {
+    return getMdxData(
+      path.join(process.cwd(), "src", "app", "blog", "contents")
+    );
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
 }
 
 export function formatDate(date: string, includeRelative = true) {
