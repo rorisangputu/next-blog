@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import BreadCrumb from "@/components/BreadCrumb";
 import { CustomMDX } from "@/components/mdx";
 import { Metadata } from "next";
+import ReportViews from "@/components/ReportViews";
 
 // ✅ Static params for dynamic routes
 export async function generateStaticParams() {
@@ -56,6 +57,7 @@ export default async function Page({
 
   return (
     <>
+    <ReportViews category={post.metadata.category} slug={post.slug} title={post.metadata.title}/>
       <Header>
         <Container>
           <BreadCrumb category={post.metadata.category} slug={post.slug} />
