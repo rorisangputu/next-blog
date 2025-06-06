@@ -1,1 +1,1 @@
-export const fetchUrl = "http://localhost:3000/api";
+export const fetchUrl = "https://next-blog-swart-mu.vercel.app/api";
