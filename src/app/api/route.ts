@@ -1,5 +1,9 @@
 import { db } from "@/db";
 
+export async function GET(){
+    return new Response("Hello", {status: 200});
+}
+
 export async function POST(request:Request) {
     const { slug, category, title } = await request.json();
     
