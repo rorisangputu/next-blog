@@ -1,4 +1,4 @@
-// import { popularposts } from "@/lib/place-data";
+"use client";
 import { fetcher, fetchUrl } from "@/lib/utils";
 import { Icons } from "../icons";
 import Link from "next/link";
