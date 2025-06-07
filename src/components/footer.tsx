@@ -1,9 +1,14 @@
+"use client";
 import { POSTS } from "@/lib/constants";
 import { Icons } from "./icons";
 import Link from "next/link";
 import { createSubscriber } from "@/lib/actions";
+//import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 export default function Footer() {
+  const initialState = { message: "", error: {} };
+  const [state, dispatch] = useActionState(createSubscriber, initialState);
   return (
     <footer className="bg-gray-100 py-8 dark:bg-gray-800 mt-10">
       <div className="container mx-auto px-4 md:px-6">
@@ -85,12 +90,15 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* NEWSLETTER */}
+
           <div className="space-y-4">
             <h3 className="text-md font-semibold">Newsletter</h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p>
-            <form action={createSubscriber}>
+            <form action={dispatch}>
               <div className="flex flex-col space-x-2 gap-2">
                 <input
                   type="email"
@@ -98,7 +106,25 @@ export default function Footer() {
                   id="email"
                   placeholder="Enter your email"
                   className="border-gray-400 border p-1 flex-1 rounded-md bg-gray-50"
+                  defaultValue=""
+                  aria-describedby="email-error"
                 />
+                <div
+                  id="email-error"
+                  aria-label="polite"
+                  aria-atomic="true"
+                  className="px-1"
+                >
+                  {state?.errors?.email &&
+                    state.errors.email.map((error: string) => (
+                      <p key={error} className="text-xs text-red-600">
+                        {error}
+                      </p>
+                    ))}
+                  {!state?.errors?.email && (
+                    <p className="text-xs text-green-600">{state?.message}</p>
+                  )}
+                </div>
                 <button
                   type="submit"
                   className="bg-black text-white py-1 px-2 text-sm font-semibold rounded-md w-[100px]"
