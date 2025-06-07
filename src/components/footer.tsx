@@ -3,7 +3,6 @@ import { POSTS } from "@/lib/constants";
 import { Icons } from "./icons";
 import Link from "next/link";
 import { createSubscriber } from "@/lib/actions";
-//import { useFormState } from "react-dom";
 import { useActionState } from "react";
 
 export default function Footer() {
