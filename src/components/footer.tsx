@@ -1,6 +1,7 @@
 import { POSTS } from "@/lib/constants";
 import { Icons } from "./icons";
 import Link from "next/link";
+import { createSubscriber } from "@/lib/actions";
 
 export default function Footer() {
   return (
@@ -89,10 +90,12 @@ export default function Footer() {
             <p className="text-gray-500 dark:text-gray-400 text-sm">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             </p>
-            <form>
+            <form action={createSubscriber}>
               <div className="flex flex-col space-x-2 gap-2">
                 <input
                   type="email"
+                  name="email"
+                  id="email"
                   placeholder="Enter your email"
                   className="border-gray-400 border p-1 flex-1 rounded-md bg-gray-50"
                 />
