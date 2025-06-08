@@ -53,6 +53,17 @@ export function getBlogPosts(): BlogPost[] {
   }
 }
 
+export function getTermsOfServices(): BlogPost[] {
+  try {
+    return getMdxData(
+      path.join(process.cwd(), "src", "app", "terms-of-services")
+    );
+  } catch (error) {
+    console.error("Error fetching content:", error);
+    return [];
+  }
+}
+
 export function formatDate(date: string, includeRelative = true) {
   const currentDate = new Date();
   if (!date.includes("T")) {
