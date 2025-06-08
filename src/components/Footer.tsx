@@ -87,6 +87,14 @@ export default function Footer() {
                   Privacy Policy
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={"/sitemap.xml"}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  Site Map
+                </Link>
+              </li>
             </ul>
           </div>
 
