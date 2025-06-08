@@ -6,6 +6,7 @@ import BreadCrumb from "@/components/BreadCrumb";
 import { CustomMDX } from "@/components/mdx";
 import { Metadata } from "next";
 import ReportViews from "@/components/ReportViews";
+import { baseUrl } from "@/app/sitemap";
 
 // ✅ Static params for dynamic routes
 export async function generateStaticParams() {
@@ -33,9 +34,34 @@ export async function generateMetadata({
 
   if (!post) return { title: "Post Not Found" };
 
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post.metadata;
+
+  const ogImage = image
+    ? image
+    : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+
   return {
-    title: post.metadata.title,
-    description: post.metadata.summary || "Blog post",
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `${baseUrl}/blog/${post?.metadata.category}/${post?.slug}`,
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -57,7 +83,11 @@ export default async function Page({
 
   return (
     <>
-    <ReportViews category={post.metadata.category} slug={post.slug} title={post.metadata.title}/>
+      <ReportViews
+        category={post.metadata.category}
+        slug={post.slug}
+        title={post.metadata.title}
+      />
       <Header>
         <Container>
           <BreadCrumb category={post.metadata.category} slug={post.slug} />

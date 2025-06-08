@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import CardCategory from "@/components/CardCategory";
 import Header from "@/components/Header";
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -19,8 +19,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { category: string } }) {
-  const { category } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
+  const { category } = await params;
 
   return {
     title: category.toLocaleUpperCase(),
