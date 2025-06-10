@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+```markdown
+# MDX Blog with Next.js
 
-## Getting Started
+A modern developer blog built with Next.js 15, MDX for content, and NextAuth for authentication.
 
-First, run the development server:
+## 🚀 Features
+
+- ✍️ Write blog posts using `.mdx` files
+- 🧠 Syntax highlighting & code blocks
+- 🧾 Dynamic routing based on blog slug
+- 🔐 Authentication with NextAuth (Google Provider)
+- 🗂 Organized folder structure for scalability
+- 🧩 Custom components within MDX
+
+## 📁 Folder Structure
+
+```
+
+src/
+├── app/               # Next.js 15 app directory
+│   └── blog/          # Dynamic blog routes
+├── components/        # UI components (e.g., Navbar, Footer, MDXRenderer)
+├── content/           # MDX blog posts live here
+├── lib/               # Utilities like getPost, getAllPosts
+├── styles/            # Tailwind or global CSS
+└── pages/api/auth/    # NextAuth API route
+
+````
+
+## 🛠 Tech Stack
+
+- **Next.js 15** (App Router)
+- **MDX** for content
+- **NextAuth** for authentication
+- **Tailwind CSS** for styling
+- **Prism.js** or **rehype-pretty-code** for code block styling
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/mdx-blog.git
+cd mdx-blog
+````
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file:
+
+```env
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key
+
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
+
+> Get your Google credentials from: [https://console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Create blog posts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add your MDX files to the `content/` folder.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Example:
 
-## Learn More
+```mdx
+---
+title: "My First Blog Post"
+slug: "my-first-post"
+date: "2024-06-01"
+---
 
-To learn more about Next.js, take a look at the following resources:
+# Hello World
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This is a post written in MDX!
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Deploying
 
-## Deploy on Vercel
+You can deploy this project on **Vercel**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+vercel
+```
