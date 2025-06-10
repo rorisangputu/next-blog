@@ -3,7 +3,7 @@
 
 ## 🌍 Live Demo
 
-Check out the live version here: [Live Site](https://next-blog-swart-mu.vercel.app/)
+Check out the live version here: https://next-blog-swart-mu.vercel.app/
 
 
 A modern developer blog built with Next.js 15, MDX for content, and NextAuth for authentication.
